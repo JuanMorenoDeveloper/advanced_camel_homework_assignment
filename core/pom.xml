@@ -24,6 +24,8 @@
 
     <jboss.fuse.bom.version>6.2.1.redhat-084</jboss.fuse.bom.version>
     <maven.bundle.plugin.version>2.3.7</maven.bundle.plugin.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <modules>
