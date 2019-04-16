@@ -10,7 +10,7 @@ This project facilitates synchronization of master patient records across differ
 
 * Receive the message from the messaging system and invoke the backend web service. The Nextgate web service will be provided for testing.  Respond to the client using the Done transformer.
 
-**Instructions**: https://www.opentlc.com/labs/agile_integration_advanced/06_1_Assignment_Lab.html
+**Instructions**: `https://www.opentlc.com/labs/agile_integration_advanced/06_1_Assignment_Lab.html`
 
 ## Requirements
 
