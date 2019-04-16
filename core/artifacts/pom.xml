@@ -85,23 +85,6 @@
 	</profiles>
 	<build>
 		<plugins>
-			<!-- <plugin> -->
-			<!-- <groupId>org.codehaus.mojo</groupId> -->
-			<!-- <artifactId>build-helper-maven-plugin</artifactId> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <phase>process-sources</phase> -->
-			<!-- <configuration> -->
-			<!-- <sources> -->
-			<!-- <source>${project.build.directory}/generated-sources</source> -->
-			<!-- </sources> -->
-			<!-- </configuration> -->
-			<!-- <goals> -->
-			<!-- <goal>add-source</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
