@@ -1,14 +1,27 @@
-Contains the core application.
+# Business Scenario
 
-Start by building the parent folder with
-~~~
-mvn clean install
-~~~
+This project facilitates synchronization of master patient records across different healthcare providers. It is important to have consistent patient information across these multiple providers so that patients may receive consistent care. For that to occur, their personal and medical information needs to be shared. Updates to the patient record also need to flow across the providers to maintain accuracy and currency.
 
-Then build this folder with the same command
+**Technical goals to accomplish the above**:
 
-Finally you can deploy all of the pieces with the features file provided. See the instructions in the readme in the folder above this for more instruction.
+* Build a RESTful CXF service that receives the patient record and validates it.
 
-Every good project has a parent pom that defines all of the properties and configuration that will be ingerited by all of the child projects. This should always include the Fuse BOM for Fuse projects. Past that, the repositories necessary are generally included in a shared settings.xml file but are here for convenience. Versions that are not already in the BOM can be added here, but you should avoid using custom versoins that are already in the BOM as there is a risk of not being supported.
+* Publish the XML to a queue and send an acknowledgement back to the client (Done transformer in the use case document).
 
-POM files used on child projects should aways be NON-SNAPSHOT final versions. It's ok to test a SNAPSHOT version, but once you have a set of dependencies, you should create a final version so that child projects have a consistent reference of versions.
+* Receive the message from the messaging system and invoke the backend web service. The Nextgate web service will be provided for testing.  Respond to the client using the Done transformer.
+
+**Instructions**: https://www.opentlc.com/labs/agile_integration_advanced/06_1_Assignment_Lab.html
+
+## Requirements
+
+* Maven 3.6.0
+
+* Java 8 
+
+## Modules
+
+* **artifacts**: WSDL and XSD files you work from
+* **inbound**: Route or service that receives the patient payload
+* **xlate**: Route that marshalls the Java object to XML
+* **outbound**: Route that publishes the XML payload on a A-MQ queue
+
