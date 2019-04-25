@@ -5,12 +5,14 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
@@ -19,7 +21,10 @@ import org.apache.cxf.jaxrs.impl.ResponseBuilderImpl;
 import com.customer.app.Person;
 import com.customer.app.response.ESBResponse;
 import com.redhat.usecase.service.DEIMService;
-
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+@Service
+@Path("/cxf/demos")
 public class DEIMServiceImpl implements DEIMService {
 
   @Produce(uri = "direct:integrateRoute")
@@ -72,6 +77,13 @@ public class DEIMServiceImpl implements DEIMService {
     }
 
     return builder.build();
+  }
+
+  @GET
+  @Path("/")
+  @Produces(MediaType.TEXT_PLAIN)
+  public String test(){
+    return "OK";
   }
 
 }

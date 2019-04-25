@@ -21,7 +21,9 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <notice.used.software>See META-INF/DEPENDENCIES</notice.used.software>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+    <spring-boot.version>1.5.20.RELEASE</spring-boot.version>
+    <camel.version>2.21.5</camel.version>
+    <cxf.version>3.2.5</cxf.version>
     <jboss.fuse.bom.version>6.2.1.redhat-084</jboss.fuse.bom.version>
     <maven.bundle.plugin.version>2.3.7</maven.bundle.plugin.version>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -32,18 +34,25 @@
     <module>artifacts</module>
     <!-- the processors module is currently not used -->
     <!--module>processors</module -->
-    <module>services</module>
+<!--    <module>services</module>-->
     <module>inbound</module>
-    <module>xlate</module>
-    <module>outbound</module>
+<!--    <module>xlate</module>-->
+<!--    <module>outbound</module>-->
     <!--<module>customer-features</module> -->
   </modules>
   <dependencyManagement>
     <dependencies>
+<!--      <dependency>-->
+<!--        <groupId>org.jboss.fuse.bom</groupId>-->
+<!--        <artifactId>jboss-fuse-parent</artifactId>-->
+<!--        <version>${jboss.fuse.bom.version}</version>-->
+<!--        <type>pom</type>-->
+<!--        <scope>import</scope>-->
+<!--      </dependency>-->
       <dependency>
-        <groupId>org.jboss.fuse.bom</groupId>
-        <artifactId>jboss-fuse-parent</artifactId>
-        <version>${jboss.fuse.bom.version}</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

@@ -11,7 +11,7 @@
 
   <artifactId>integration-test-server</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>bundle</packaging>
+<!--  <packaging>bundle</packaging>-->
 
   <name>Customer :: Application :: Core :: Services :: Integration-Test-Server</name>
 
