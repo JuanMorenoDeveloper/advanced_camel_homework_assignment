@@ -20,7 +20,6 @@ public class InboundRoute extends RouteBuilder {
   public void configure() {
 
     JaxbDataFormat personDataFormat = new JaxbDataFormat();
-    //personDataFormat.setContextPath("com.customer.app");
     personDataFormat.setContextPath(Person.class.getPackage().getName());
     personDataFormat.setPrettyPrint(true);
 
@@ -28,7 +27,6 @@ public class InboundRoute extends RouteBuilder {
     nextDataFormat.setContextPath(ExecuteMatchUpdate.class.getPackage().getName());
     nextDataFormat.setPrettyPrint(true);
 
-//    this.getContext().getTypeConverterRegistry().addTypeConverter(ExecuteMatchUpdate.class, Person.class, new MyTypeConverter());
     context.getTypeConverterRegistry().addTypeConverter(ExecuteMatchUpdate.class, Person.class, new MyTypeConverter());
 
     from("direct:start")
@@ -39,13 +37,13 @@ public class InboundRoute extends RouteBuilder {
         .inOnly("mq:q.empi.deim.in")
         .transform(constant("done - inbound"));
 
-    from("mq:q.empi.deim.in")
-        .log("xlate")
-        .unmarshal(personDataFormat)
-        .to("log:com.company.app?showAll=true&multiline=true")
-        .convertBodyTo(ExecuteMatchUpdate.class)
-        .marshal(nextDataFormat)
-        .inOnly("mq:q.empi.deim.out")
-        .transform(constant("doneeee"));
+//    from("mq:q.empi.deim.in")
+//        .log("xlate")
+//        .unmarshal(personDataFormat)
+//        .to("log:com.company.app?showAll=true&multiline=true")
+//        .convertBodyTo(ExecuteMatchUpdate.class)
+//        .marshal(nextDataFormat)
+//        .inOnly("mq:q.empi.deim.out")
+//        .transform(constant("doneeee"));
   }
 }

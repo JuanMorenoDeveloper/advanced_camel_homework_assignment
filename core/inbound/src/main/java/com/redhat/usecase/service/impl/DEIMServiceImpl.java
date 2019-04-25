@@ -80,7 +80,7 @@ public class DEIMServiceImpl implements DEIMService {
   }
 
   @GET
-  @Path("/")
+  @Path("/test")
   @Produces(MediaType.TEXT_PLAIN)
   public String test(){
     return "OK";

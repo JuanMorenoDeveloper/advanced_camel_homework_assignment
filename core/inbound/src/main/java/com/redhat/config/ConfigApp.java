@@ -1,10 +1,10 @@
 package com.redhat.config;
 
-import com.redhat.usecase.service.DEIMService;
 import com.redhat.usecase.service.impl.DEIMServiceImpl;
-import org.apache.camel.CamelContext;
-import org.apache.camel.model.dataformat.JaxbDataFormat;
-import org.apache.camel.spring.boot.CamelContextConfiguration;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.camel.component.ActiveMQComponent;
+import org.apache.activemq.pool.PooledConnectionFactory;
+import org.apache.camel.component.jms.JmsConfiguration;
 import org.apache.cxf.Bus;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
@@ -39,7 +39,7 @@ public class ConfigApp {
 //  }
 
   @Bean
-  public Server rsServer() {
+  public Server cxfServer() {
     JAXRSServerFactoryBean endpoint = new JAXRSServerFactoryBean();
     endpoint.setBus(bus);
     endpoint.setAddress("/");
@@ -47,4 +47,33 @@ public class ConfigApp {
     return endpoint.create();
   }
 
+  public ActiveMQConnectionFactory connectionFactory() {
+    ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
+    factory.setBrokerURL("failover:(tcp://127.0.0.1:61616)?maxReconnectDelay=2000");
+    factory.setUserName("admin");
+    factory.setPassword("password");
+    return factory;
+  }
+
+  public PooledConnectionFactory pooledConnectionFactory() {
+    PooledConnectionFactory factory = new PooledConnectionFactory();
+    factory.setMaxConnections(1);
+    factory.setConnectionFactory(connectionFactory());
+    return factory;
+  }
+
+  @Bean("jmsConfig")
+  public JmsConfiguration jmsConfiguration() {
+    JmsConfiguration config = new JmsConfiguration();
+    config.setConnectionFactory(pooledConnectionFactory());
+    config.setConcurrentConsumers(1);
+    return config;
+  }
+
+  @Bean("mq")
+  public ActiveMQComponent activeMQComponent() {
+    ActiveMQComponent component = new ActiveMQComponent();
+    component.setConfiguration(jmsConfiguration());
+    return component;
+  }
 }
