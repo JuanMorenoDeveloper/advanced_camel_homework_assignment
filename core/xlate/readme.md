@@ -6,7 +6,7 @@ Use code Annotations and maven+spring dependency injection to tie in or bind pro
 
 ~~~
 
-This project takes the person request from the broker and converts it to our Java Person object. We print it so we know we have everything. Then we convert it to the NextGate format we need. Finally we send the message that is ready for dilvery back to the broker so the outbound route can send it.
+This project takes the person request from the broker and converts it to our Java Person object. We print it so we know we have everything. Then we convert it to the NextGate format we need. Finally we send the message that is ready for dilvery back to the broker so the outbound com.redhat.route can send it.
 
 The logic for the transformer is all in src/main/java/com/redhat/customer/translate/TransformToExecuteMatch.java
 

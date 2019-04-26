@@ -21,7 +21,6 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <notice.used.software>See META-INF/DEPENDENCIES</notice.used.software>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<!--    <spring-boot.version>1.5.20.RELEASE</spring-boot.version>-->
     <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
     <camel.version>2.23.2</camel.version>
     <cxf.version>3.2.5</cxf.version>
@@ -37,7 +36,7 @@
     <!--module>processors</module -->
 <!--    <module>services</module>-->
     <module>inbound</module>
-<!--    <module>xlate</module>-->
+    <module>xlate</module>
 <!--    <module>outbound</module>-->
     <!--<module>customer-features</module> -->
   </modules>

@@ -1,23 +1,22 @@
 package com.redhat.customer.translate;
 
-import org.apache.camel.Converter;
-import org.apache.camel.Exchange;
-import org.apache.camel.TypeConversionException;
-
 import com.customer.app.Person;
 import com.sun.mdm.index.webservice.CallerInfo;
 import com.sun.mdm.index.webservice.ExecuteMatchUpdate;
 import com.sun.mdm.index.webservice.PersonBean;
 import com.sun.mdm.index.webservice.SystemPerson;
+import org.apache.camel.Converter;
+import org.apache.camel.Exchange;
+import org.apache.camel.TypeConversionException;
+import org.apache.camel.support.TypeConverterSupport;
 
 @Converter
-public class TransformToExecuteMatch {
+public class TransformToExecuteMatch extends TypeConverterSupport {
 
-  @Converter
-  public ExecuteMatchUpdate convertTo(Object value, Exchange exchange)
-  throws TypeConversionException {
-
-    Person person = (Person)value;
+  @Override
+  public <T> T convertTo(Class<T> aClass, Exchange exchange, Object value)
+      throws TypeConversionException {
+    Person person = (Person) value;
     SystemPerson systemPerson = new SystemPerson();
     PersonBean personBean = new PersonBean();
 
@@ -39,11 +38,11 @@ public class TransformToExecuteMatch {
     executeMatchUpdate.setCallerInfo(callerInfo);
     executeMatchUpdate.setSysObjBean(systemPerson);
 
-    if(exchange!=null ){
+    if (exchange != null) {
       exchange.getOut().setBody(executeMatchUpdate);
     }
 
-    return executeMatchUpdate;
+    return (T) executeMatchUpdate;
   }
 
 }
