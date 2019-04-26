@@ -1,4 +1,4 @@
-package redhat.route;
+package com.redhat.route;
 
 import com.sun.mdm.index.webservice.ExecuteMatchUpdate;
 import org.apache.camel.builder.RouteBuilder;

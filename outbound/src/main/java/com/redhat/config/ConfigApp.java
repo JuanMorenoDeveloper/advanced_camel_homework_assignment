@@ -1,4 +1,4 @@
-package redhat.config;
+package com.redhat.config;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;

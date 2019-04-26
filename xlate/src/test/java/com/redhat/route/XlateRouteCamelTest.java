@@ -1,7 +1,8 @@
-package route;
+package com.redhat.route;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.redhat.XlateApp;
 import java.nio.charset.StandardCharsets;
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
@@ -19,13 +20,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import redhat.OutboundApp;
 
 @RunWith(CamelSpringBootRunner.class)
 @UseAdviceWith
-@SpringBootTest(classes = OutboundApp.class)
+@SpringBootTest(classes = XlateApp.class)
 @MockEndpoints
-public class OutboundRouteCamelTest {
+public class XlateRouteCamelTest {
 
   @EndpointInject(uri = "mock:out")
   private MockEndpoint mockOut;
@@ -37,22 +37,20 @@ public class OutboundRouteCamelTest {
   private CamelContext context;
 
   @Test
-  public void whenOutboundRouteIsCalled_thenSuccess() throws Exception {
+  public void whenXlateRouteIsCalled_thenSuccess() throws Exception {
     mockOut.expectedMinimumMessageCount(1);
-    RouteDefinition route = context.getRouteDefinition("OutboundRoute");
+    RouteDefinition route = context.getRouteDefinition("XlateRoute");
     route.adviceWith(context, new AdviceWithRouteBuilder() {
       @Override
       public void configure() {
         replaceFromWith("direct:start");
-        weaveByToUri(
-            "cxf://http://localhost:8181/cxf/PersonEJBService/PersonEJB?serviceClass=com.sun.mdm.index.webservice.PersonEJB&defaultOperationName=executeMatchUpdate&dataFormat=PAYLOAD")
-            .replace().to("mock:out");
+        weaveByToUri("mq:q.empi.deim.out").replace().to("mock:out");
       }
     });
     context.start();
 
     String response = (String) template.requestBodyAndHeader("direct:start",
-        getSampleMessage("/executeMatchUpdateRequest.xml"), Exchange.CONTENT_TYPE,
+        getSampleMessage("/SimplePerson.xml"), Exchange.CONTENT_TYPE,
         "application/xml");
 
     String body = mockOut.getExchanges().get(0).getMessage().getBody(String.class);
