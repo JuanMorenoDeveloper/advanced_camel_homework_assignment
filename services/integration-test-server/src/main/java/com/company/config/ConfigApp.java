@@ -5,6 +5,8 @@ import com.sun.mdm.index.webservice.PersonEJB;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.ext.logging.LoggingFeature;
+import org.apache.cxf.ext.logging.LoggingInInterceptor;
+import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +35,8 @@ public class ConfigApp {
     String wsdlLocation = "wsdl/EMPI_18080_2.wsdl";
     endpoint.publish(endpointUrl);
     endpoint.setWsdlLocation(wsdlLocation);
-    endpoint.getFeatures().add(new LoggingFeature());
+    endpoint.getInInterceptors().add(new LoggingInInterceptor());
+    endpoint.getOutInterceptors().add(new LoggingOutInterceptor());
     return endpoint;
   }
 
