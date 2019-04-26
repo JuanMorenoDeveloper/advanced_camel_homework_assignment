@@ -124,3 +124,9 @@ The routes are implemented with the Java DSL and Spring Boot. This choice is bec
 * Add configuration to make de solution compatible with OSGI.
 
 * Use the Java DSL to define the nodes in the routes, for example instead of using "cxf..." we can use the `CxfEndpoint` class.
+
+* Add spring actuator in order to monitor the route's health 
+
+* Add dependencies and configuration to support JDK 11 (ej, jaxb)
+
+* Use static analysis tools in the project (PMD, CheckStyle, SpotBugs)
