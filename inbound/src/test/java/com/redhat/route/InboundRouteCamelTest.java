@@ -2,7 +2,7 @@ package com.redhat.route;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.redhat.MainApp;
+import com.redhat.InboundApp;
 import java.nio.charset.StandardCharsets;
 import javax.ws.rs.core.MediaType;
 import org.apache.camel.CamelContext;
@@ -24,7 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @RunWith(CamelSpringBootRunner.class)
 @UseAdviceWith
-@SpringBootTest(classes = MainApp.class)
+@SpringBootTest(classes = InboundApp.class)
 @MockEndpoints("mock:a")
 public class InboundRouteCamelTest {
 
