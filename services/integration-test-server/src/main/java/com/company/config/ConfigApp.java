@@ -4,7 +4,6 @@ import com.company.app.test.PersonEJBImpl;
 import com.sun.mdm.index.webservice.PersonEJB;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
-import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.ext.logging.LoggingInInterceptor;
 import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.EndpointImpl;
@@ -21,7 +20,7 @@ public class ConfigApp {
   /**
    * Service implementation.
    */
-  public PersonEJB demoServiceEndpoint() {
+  public PersonEJB personEjbImpl() {
     return new PersonEJBImpl();
   }
 
@@ -30,7 +29,7 @@ public class ConfigApp {
    */
   @Bean
   public Endpoint endpoint() {
-    EndpointImpl endpoint = new EndpointImpl(bus, demoServiceEndpoint());
+    EndpointImpl endpoint = new EndpointImpl(bus, personEjbImpl());
     String endpointUrl = "/PersonEJBService/PersonEJB";
     String wsdlLocation = "wsdl/EMPI_18080_2.wsdl";
     endpoint.publish(endpointUrl);
