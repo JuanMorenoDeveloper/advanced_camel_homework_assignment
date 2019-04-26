@@ -1,1 +1,0 @@
-curl -F "@data=@SimplePatient.xml" http://localhost:8080/cxf/demos/match -H "Content-Type: application/xml"

@@ -11,26 +11,29 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@Path("/cxf/demos")
+@Path("/deim")
 public class DEIMServiceImpl implements DEIMService {
 
-
-  @Autowired
   private CamelContext context;
 
-  private ProducerTemplate template;
+  public DEIMServiceImpl() {
+  }
+
+  public DEIMServiceImpl(CamelContext context) {
+    this.context = context;
+  }
 
   @Override
   @POST
-  @Path("/match")
+  @Path("/add")
   @Consumes(MediaType.APPLICATION_XML)
+  @Produces(MediaType.TEXT_PLAIN)
   public Response addPerson(Person person) {
 
-    template = context.createProducerTemplate();
+    ProducerTemplate template = context.createProducerTemplate();
 
     String requestMsg = (String) template.requestBody("direct:start", person);
 

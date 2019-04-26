@@ -1,9 +1,11 @@
 package com.redhat.config;
 
+import com.redhat.usecase.service.DEIMService;
 import com.redhat.usecase.service.impl.DEIMServiceImpl;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.activemq.pool.PooledConnectionFactory;
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.jms.JmsConfiguration;
 import org.apache.cxf.Bus;
 import org.apache.cxf.endpoint.Server;
@@ -16,34 +18,17 @@ import org.springframework.context.annotation.Configuration;
 public class ConfigApp {
 
   @Autowired
-  private Bus bus;
-  @Autowired
-  private DEIMServiceImpl service;
+  private CamelContext context;
 
-//  @Bean
-//  public CamelContextConfiguration contextConfiguration() {
-//    return new CamelContextConfiguration() {
-//      @Override
-//      public void beforeApplicationStart(CamelContext context) {
-//        // your custom configuration goes here
-////        JaxbDataFormat format = new JaxbDataFormat();
-////        format.setId("personFormat");
-////        format.setPartClass("com.customer.app.Person");
-////        context.getDataFormats().put("personFormat", format);
-//      }
-//
-//      @Override
-//      public void afterApplicationStart(CamelContext camelContext) {
-//      }
-//    };
-//  }
+  @Autowired
+  private Bus bus;
 
   @Bean
   public Server cxfServer() {
     JAXRSServerFactoryBean endpoint = new JAXRSServerFactoryBean();
     endpoint.setBus(bus);
     endpoint.setAddress("/");
-    endpoint.setResourceClasses(DEIMServiceImpl.class);
+    endpoint.setServiceBean(deimService());
     return endpoint.create();
   }
 
@@ -75,5 +60,10 @@ public class ConfigApp {
     ActiveMQComponent component = new ActiveMQComponent();
     component.setConfiguration(jmsConfiguration());
     return component;
+  }
+
+  @Bean
+  public DEIMService deimService() {
+    return new DEIMServiceImpl(context);
   }
 }
