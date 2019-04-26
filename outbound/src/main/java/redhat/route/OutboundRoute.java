@@ -18,7 +18,7 @@ public class OutboundRoute extends RouteBuilder {
         .log("outbound")
         .unmarshal(nextDataFormat)
         .to("log:com.company.app?showAll=true&multiline=true")
-        .to("cxf://http://localhost:8181/cxf/PersonEJBService/PersonEJB?serviceClass=com.sun.mdm.index.webservice.PersonEJB&dataFormat=MESSAGE")
+        .to("cxf://http://localhost:8181/cxf/PersonEJBService/PersonEJB?serviceClass=com.sun.mdm.index.webservice.PersonEJB&defaultOperationName=executeMatchUpdate&dataFormat=PAYLOAD")
         .transform(constant("DONE"));
   }
 }
