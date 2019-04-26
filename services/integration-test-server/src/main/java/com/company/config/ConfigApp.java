@@ -19,14 +19,14 @@ public class ConfigApp {
   private Bus bus;
 
   /**
-   * Implementación del servicio
+   * Service implementation.
    */
   public PersonEJB demoServiceEndpoint() {
     return new PersonEJBImpl();
   }
 
   /**
-   * Ubicación del wsdl y el endpoint
+   * Endpoint configuration.
    */
   @Bean
   public Endpoint endpoint() {
