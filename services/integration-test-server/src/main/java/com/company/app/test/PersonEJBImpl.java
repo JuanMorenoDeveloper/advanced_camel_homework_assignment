@@ -3,7 +3,6 @@ package com.company.app.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.camel.CamelContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,8 +41,6 @@ import com.sun.mdm.index.webservice.UserException_Exception;
 
 public class PersonEJBImpl implements PersonEJB {
     private static final Logger LOG = LoggerFactory.getLogger(PersonEJBImpl.class);
-
-    private CamelContext context;
 
     // For the DEMO this is the only method that is used,
     // it prints some ingo and then compares the Firstname to see if there is a match.
@@ -557,11 +554,4 @@ public class PersonEJBImpl implements PersonEJB {
         return personBean;
     }
 
-    public CamelContext getContext() {
-        return context;
-    }
-
-    public void setContext(CamelContext context) {
-        this.context = context;
-    }
 }

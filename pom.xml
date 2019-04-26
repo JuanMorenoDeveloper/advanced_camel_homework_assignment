@@ -31,6 +31,7 @@
     <module>inbound</module>
     <module>xlate</module>
     <module>outbound</module>
+    <module>services/integration-test-server</module>
   </modules>
   <dependencyManagement>
     <dependencies>
