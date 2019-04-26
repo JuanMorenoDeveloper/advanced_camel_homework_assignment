@@ -1,5 +1,7 @@
 package com.redhat.route;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.redhat.MainApp;
 import java.nio.charset.StandardCharsets;
 import javax.ws.rs.core.MediaType;
@@ -46,8 +48,11 @@ public class InboundRouteCamelTest {
       }
     });
     context.start();
-    template.requestBodyAndHeader("direct:start",
+
+    String response = (String) template.requestBodyAndHeader("direct:start",
         getSampleMessage("/SimplePatient.xml"), Exchange.CONTENT_TYPE, MediaType.APPLICATION_XML);
+
+    assertThat(response).isEqualTo("DONE");
     mock.assertIsSatisfied();
   }
 

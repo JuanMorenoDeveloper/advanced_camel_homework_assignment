@@ -19,6 +19,6 @@ public class InboundRoute extends RouteBuilder {
         .to("log:com.company.app?showAll=true&multiline=true")
         .convertBodyTo(String.class)
         .inOnly("mq:q.empi.deim.in")
-        .transform(constant("done - inbound"));
+        .transform(constant("DONE"));
   }
 }
