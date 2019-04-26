@@ -32,23 +32,12 @@
 
   <modules>
     <module>artifacts</module>
-    <!-- the processors module is currently not used -->
-    <!--module>processors</module -->
-<!--    <module>services</module>-->
     <module>inbound</module>
     <module>xlate</module>
-<!--    <module>outbound</module>-->
-    <!--<module>customer-features</module> -->
+    <!--    <module>outbound</module>-->
   </modules>
   <dependencyManagement>
     <dependencies>
-<!--      <dependency>-->
-<!--        <groupId>org.jboss.fuse.bom</groupId>-->
-<!--        <artifactId>jboss-fuse-parent</artifactId>-->
-<!--        <version>${jboss.fuse.bom.version}</version>-->
-<!--        <type>pom</type>-->
-<!--        <scope>import</scope>-->
-<!--      </dependency>-->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -58,18 +47,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-<!--  <build>-->
-<!--    <pluginManagement>-->
-<!--      <plugins>-->
-<!--        <plugin>-->
-<!--          <groupId>org.apache.felix</groupId>-->
-<!--          <artifactId>maven-bundle-plugin</artifactId>-->
-<!--          <version>${maven.bundle.plugin.version}</version>-->
-<!--        </plugin>-->
-<!--      </plugins>-->
-<!--    </pluginManagement>-->
-<!--  </build>-->
 
   <repositories>
     <repository>
