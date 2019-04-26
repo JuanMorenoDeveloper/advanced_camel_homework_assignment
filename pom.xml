@@ -18,14 +18,10 @@
   </organization>
 
   <properties>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <notice.used.software>See META-INF/DEPENDENCIES</notice.used.software>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
     <camel.version>2.23.2</camel.version>
     <cxf.version>3.2.5</cxf.version>
-    <jboss.fuse.bom.version>6.2.1.redhat-084</jboss.fuse.bom.version>
-    <maven.bundle.plugin.version>2.3.7</maven.bundle.plugin.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
@@ -34,7 +30,7 @@
     <module>artifacts</module>
     <module>inbound</module>
     <module>xlate</module>
-    <!--    <module>outbound</module>-->
+    <module>outbound</module>
   </modules>
   <dependencyManagement>
     <dependencies>
@@ -47,85 +43,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <repositories>
-    <repository>
-      <id>jboss-ga-repository</id>
-      <url>http://maven.repository.redhat.com/techpreview/all</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>jboss-public-repository</id>
-      <url>http://repository.jboss.org/nexus/content/repositories/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>fuse-repository</id>
-      <url>http://repo.fusesource.com/nexus/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>fusesource</id>
-      <url>http://repo.fusesource.com/maven2</url>
-      <snapshots>
-        <enabled>false</enabled>
-        <updatePolicy>daily</updatePolicy>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
-      </releases>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>jboss-ga-plugin-repository</id>
-      <url>http://maven.repository.redhat.com/techpreview/all</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>jboss-public-plugin-repository</id>
-      <url>http://repository.jboss.org/nexus/content/repositories/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>fusesource</id>
-      <name>jboss-fusesource</name>
-      <url>http://repo.fusesource.com/maven2</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-        <updatePolicy>daily</updatePolicy>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
 </project>
