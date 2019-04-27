@@ -252,6 +252,8 @@ The routes are implemented with the Java DSL and Spring Boot. This choice is bec
 
 * Use the Java DSL to define the nodes in the routes, for example instead of using "cxf..." we can use the `CxfEndpoint` class.
 
+* Externalize endpoint urls an credentials configuration. 
+
 * Run performance tests in order to measure request/s
 
 * Add DLQ to handle exceptions in current routes
