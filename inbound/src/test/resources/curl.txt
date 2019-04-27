@@ -1,1 +1,3 @@
 curl --data "@SimplePatient.xml" http://localhost:8080/deim/add -H "Content-Type: application/xml" -v
+
+curl --data "@PatientDemographics.xml" http://localhost:8080/deim/add -H "Content-Type: application/xml" -v
