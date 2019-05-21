@@ -1,12 +1,11 @@
+# Module description
+
 Contains Web and Restful Service Implementations & Interfaces.
 
-Note: Import the artifacts folder as a dependency since it contains the generated code from the Web Service contracts.
-
-Ensure that the Implementation details are not exported from the bundle (in case of OSGi)
-and only the interfaces are exported.
+Note: This project imports the artifacts module as a dependency since it contains the generated code from the Web Service contracts.
 
 May contain several services implemented separately or combined.
 
-~~~
+## Usage
 
-This project contains both a test server which we are labeling a service, and an actual OSGi service which exposes a connection pool to the local AMQ broker.
+This project contains only a test server which we are labeling a service.
