@@ -256,8 +256,6 @@ The routes are implemented with the Java DSL and Spring Boot. This choice is bec
 
 * Run performance tests in order to measure request/s
 
-* Add DLQ to handle exceptions in current routes
-
 * Add spring actuator in order to monitor the route's health 
 
 * Use static analysis tools in the project (PMD, CheckStyle, SpotBugs)

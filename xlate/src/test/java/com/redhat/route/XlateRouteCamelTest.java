@@ -20,16 +20,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 @RunWith(CamelSpringBootRunner.class)
 @UseAdviceWith
 @SpringBootTest(classes = XlateApp.class)
 @MockEndpoints
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class XlateRouteCamelTest {
 
   @EndpointInject(uri = "mock:out")
   private MockEndpoint mockOut;
-
+  @EndpointInject(uri = "mock:outdlq")
+  private MockEndpoint mockDlq;
   @Produce(uri = "direct:start")
   private ProducerTemplate template;
 
@@ -37,14 +40,15 @@ public class XlateRouteCamelTest {
   private CamelContext context;
 
   @Test
-  public void whenXlateRouteIsCalled_thenSuccess() throws Exception {
+  public void givenValidMessage_whenXlateRouteIsCalled_thenSuccess() throws Exception {
     mockOut.expectedMinimumMessageCount(1);
-    RouteDefinition route = context.getRouteDefinition("XlateRoute");
-    route.adviceWith(context, new AdviceWithRouteBuilder() {
+    RouteDefinition xlateRoute = context.getRouteDefinition("XlateRoute");
+    xlateRoute.adviceWith(context, new AdviceWithRouteBuilder() {
       @Override
       public void configure() {
         replaceFromWith("direct:start");
         weaveByToUri("mq:q.empi.deim.out").replace().to("mock:out");
+        weaveByToUri("mq:q.empi.transform.dlq").replace().to("mock:outdlq");
       }
     });
     context.start();
@@ -58,6 +62,28 @@ public class XlateRouteCamelTest {
     assertThat(body)
         .contains("<authUser>Xlate</authUser>");
     mockOut.assertIsSatisfied();
+  }
+
+  @Test
+  public void givenInvalidMessage_whenXlateRouteIsCalled_thenExceptionHandled() throws Exception {
+    mockDlq.expectedMessageCount(1);
+    RouteDefinition xlateRoute = context.getRouteDefinition("XlateRoute");
+    xlateRoute.adviceWith(context, new AdviceWithRouteBuilder() {
+      @Override
+      public void configure() {
+        replaceFromWith("direct:start");
+        weaveByToUri("mq:q.empi.deim.out").replace().to("mock:out");
+        weaveByToUri("mq:q.empi.transform.dlq").replace().to("mock:outdlq");
+      }
+    });
+    context.start();
+
+    template.requestBodyAndHeader("direct:start",
+        getSampleMessage("/SimplePersonWrong.xml"), Exchange.CONTENT_TYPE,
+        "application/xml");
+
+    mockDlq.assertIsSatisfied();
+    context.stop();
   }
 
   private String getSampleMessage(String filename) throws Exception {

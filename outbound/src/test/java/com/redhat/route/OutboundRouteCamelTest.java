@@ -20,16 +20,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 @RunWith(CamelSpringBootRunner.class)
 @UseAdviceWith
 @SpringBootTest(classes = OutboundApp.class)
 @MockEndpoints
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class OutboundRouteCamelTest {
 
   @EndpointInject(uri = "mock:out")
   private MockEndpoint mockOut;
-
+  @EndpointInject(uri = "mock:outdlq")
+  private MockEndpoint mockDlq;
   @Produce(uri = "direct:start")
   private ProducerTemplate template;
 
@@ -47,6 +50,7 @@ public class OutboundRouteCamelTest {
         weaveByToUri(
             "cxf://http://localhost:8181/cxf/PersonEJBService/PersonEJB?serviceClass=com.sun.mdm.index.webservice.PersonEJB&defaultOperationName=executeMatchUpdate&dataFormat=PAYLOAD")
             .replace().to("mock:out");
+        weaveByToUri("mq:q.empi.nextgate.dlq").replace().to("mock:outdlq");
       }
     });
     context.start();
@@ -60,6 +64,26 @@ public class OutboundRouteCamelTest {
     assertThat(body)
         .contains("<authUser>Xlate</authUser>");
     mockOut.assertIsSatisfied();
+  }
+
+  @Test
+  public void givenServerOffline_whenOutboundRouteIsCalled_thenHandleException() throws Exception {
+    mockDlq.expectedMinimumMessageCount(1);
+    RouteDefinition route = context.getRouteDefinition("OutboundRoute");
+    route.adviceWith(context, new AdviceWithRouteBuilder() {
+      @Override
+      public void configure() {
+        replaceFromWith("direct:start");
+        weaveByToUri("mq:q.empi.nextgate.dlq").replace().to("mock:outdlq");
+      }
+    });
+    context.start();
+
+    template.requestBodyAndHeader("direct:start",
+        getSampleMessage("/executeMatchUpdateRequest.xml"), Exchange.CONTENT_TYPE,
+        "application/xml");
+
+    mockDlq.assertIsSatisfied();
   }
 
   private String getSampleMessage(String filename) throws Exception {
