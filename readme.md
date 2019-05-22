@@ -17,7 +17,7 @@ This project facilitates the synchronization of master patient records across di
 
 * Maven 3.6.0
 
-* Java 8
+* Java 8/11
 
 * ActiveMQ Broker 7.1
 
@@ -259,7 +259,5 @@ The routes are implemented with the Java DSL and Spring Boot. This choice is bec
 * Add DLQ to handle exceptions in current routes
 
 * Add spring actuator in order to monitor the route's health 
-
-* Add dependencies and configuration to support JDK 11 (ej, jaxb)
 
 * Use static analysis tools in the project (PMD, CheckStyle, SpotBugs)

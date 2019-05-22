@@ -19,11 +19,17 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
-    <camel.version>2.23.2</camel.version>
-    <cxf.version>3.2.5</cxf.version>
+    <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+    <camel.version>2.24.0</camel.version>
+    <cxf.version>3.3.2</cxf.version>
+    <cxf-xjc-plugin.version>3.3.0</cxf-xjc-plugin.version>
+    <commons-io.version>2.6</commons-io.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <!--Java 11 dependencies-->
+    <jaxb-runtime.version>2.4.0-b180830.0438</jaxb-runtime.version>
+    <jaxws-rt.version>2.3.2</jaxws-rt.version>
+    <jakarta-activation.version>1.2.1</jakarta-activation.version>
   </properties>
 
   <modules>
