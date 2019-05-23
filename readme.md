@@ -19,7 +19,7 @@ This project facilitates the synchronization of master patient records across di
 
 * Java 8/11
 
-* ActiveMQ Broker 7.1
+* ActiveMQ Broker 7.2
 
 # Modules
 
@@ -32,6 +32,10 @@ This project facilitates the synchronization of master patient records across di
 * **outbound**: Route that publishes the XML payload on a A-MQ queue
 
 * **services/integration-test-server**: The Nextgate web service to test Business Scenario integration
+
+# Configuration
+
+Basic configuration like broker-url, user, password is located in the application.yml files of each module.
 
 # Build project
 
@@ -251,8 +255,6 @@ The routes are implemented with the Java DSL and Spring Boot. This choice is bec
 * Add configuration to make de solution compatible with OSGI.
 
 * Use the Java DSL to define the nodes in the routes, for example instead of using "cxf..." we can use the `CxfEndpoint` class.
-
-* Externalize endpoint urls an credentials configuration. 
 
 * Run performance tests in order to measure request/s
 
