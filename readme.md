@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/earth001/advanced_camel_homework_assignment.svg?branch=master)](https://travis-ci.org/earth001/advanced_camel_homework_assignment)
+[![Build Status](https://travis-ci.org/JuanMorenoDeveloper/advanced_camel_homework_assignment.svg?branch=master)](https://travis-ci.org/JuanMorenoDeveloper/advanced_camel_homework_assignment)
 # Business Scenario
 
 This project facilitates the synchronization of master patient records across different healthcare providers. It is important to have consistent patient information across these multiple providers so that patients may receive consistent care. For that to occur, their personal and medical information needs to be shared. Updates to the patient record also need to flow across the providers to maintain accuracy and currency.
